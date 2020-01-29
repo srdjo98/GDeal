@@ -13,7 +13,9 @@ require_once "functions.php";
     $query = mysqli_query(db(),$sql);
     $result = mysqli_fetch_assoc($query);
 
-    $sql1 = "SELECT * FROM user WHERE email = '$email' AND password = '$password' AND id_groups = '2' AND verified = 1 ";
+    $passwordn = md5($password);
+
+    $sql1 = "SELECT * FROM user WHERE email = '$email' AND password = '$passwordn' AND id_groups = '2' AND verified = 1 ";
     $query1 = mysqli_query(db(),$sql1);
     $result1 = mysqli_fetch_assoc($query1);
     

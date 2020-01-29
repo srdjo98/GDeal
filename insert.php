@@ -9,6 +9,14 @@ if (!isset($_SESSION['id_user'])) {
 if(isset($_POST['insert'])){
 
     $name = mysqli_real_escape_string(db(),$_POST['name']);
+    if($name == 1){
+        $name  = "monitor";
+    }elseif($name == 2){
+        $name = "mouse";
+    }elseif($name == 3){
+        $name = "laptop";
+    }
+    
     $sql1 = "SELECT id_category FROM category WHERE name = '".$name."'";
     $query = mysqli_query(db(),$sql1);
     $result = mysqli_fetch_assoc($query);
@@ -16,7 +24,7 @@ if(isset($_POST['insert'])){
     foreach($result as $k => $v){
         $id_category = $v;
     }
-    var_dump($id_category);
+    
 
         $title = mysqli_real_escape_string(db(),$_POST['title']);
         $image = mysqli_real_escape_string(db(),$_POST['image']);

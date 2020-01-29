@@ -38,7 +38,17 @@ function getALL(){
     return $result;
 }
 
+function getProduct(){
+    $id_category = mysqli_real_escape_string(db(), $_GET['id_category']);
+    
+    $sql = "SELECT product.id_product,product.id_category,product.title,product.price,product.image,product.description,category.name FROM product INNER JOIN category ON product.id_category = category.id_category WHERE category.id_category ='$id_category'"; 
+    
+    $query = mysqli_query(db(),$sql);
+    $result = mysqli_fetch_all($query,MYSQLI_ASSOC);
+    return $result;
 
+
+}
 
 
 

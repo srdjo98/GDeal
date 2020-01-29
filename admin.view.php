@@ -5,7 +5,11 @@
                     <p class="display-4">Add new Product </p>
                     <form action="insert.php" method="post">
                         <div  class="card-body">
-                            Category <input type="text" name="name"> | monitor  laptop  mouse  keyboard<br><br>
+                             Category <select name='name'>
+                                <option value='1' stud_name='sre'>Monitor</option>
+                                <option value='2' stud_name='sam'>Mouse</option>
+                                <option value='3' stud_name='john'>Laptop</option>
+                                </select> <br><br>
                             Title <input type="text" name="title"><br><br>
                                 
                         

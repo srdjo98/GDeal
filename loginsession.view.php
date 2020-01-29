@@ -6,16 +6,18 @@ if (!isset($_SESSION['cart'])) {
 	$_SESSION['cart'] = [];
 }
 ?>
+
+
 <?php $product = getAll(); ?>
 <div class="container">
 
     <div class="row">
     
         <div class="col-10 offset-1">
-            <p class='display-2 text-center mt-3 '>All Products </p>
+            <p class='display-4 text-center mt-3 col-12 '>All Products </p>
             <form action="loginsession.view.php" method="get">
             <input type="text" name="search" placeholder="search" class="form-control"><br>
-            <input type="submit" name='submit' class="btn btn-primary form-control" value="Search">
+            <input type="submit" name='submit' class="btn btn-secondary form-control" value="Search">
             </form>
            
             <?php 
@@ -29,6 +31,28 @@ if (!isset($_SESSION['cart'])) {
            <table class="table">
             <thead>
                 <tr>
+
+                <tr>
+<td width="150"  valign="top">
+<b class="h4">Categorys : </b>
+<br />
+<?php
+
+   $sql = "SELECT * FROM category ORDER BY name ASC";
+    $result = mysqli_query(db(),$sql) or die(mysqli_error(db()));
+   
+     if (mysqli_num_rows($result)>0)
+     {
+         while ($record = mysqli_fetch_array($result,MYSQLI_BOTH))
+        
+         echo "<a href=\"products.php?id_category=$record[id_category]\"><button class='btn btn btn-outline-dark btn-sm mt-3 col-xl-4 col-md-4 col-12
+         '>$record[name]</button></a><br />";
+         
+     }
+     
+?>
+
+
      <?php
     
     
@@ -49,7 +73,7 @@ if (!isset($_SESSION['cart'])) {
       
             echo "<p class='display-4 text-center mt-3 '>Product $record[title] </p>";
             
-            echo "<div class='col-4'>";
+            echo "<div class='col-12'>";
              echo   "<div class='card mb-2 mt-2  '>";
                 
                   echo  "<div class='card-body text-center ' >";
@@ -100,9 +124,10 @@ if (!isset($_SESSION['cart'])) {
              <?php foreach($product as $p): ?>
               
         
-                <div class="col-4 ">
+                <div class="col-xl-6 col-12 col-md-6">
                 <form action="cart.php" method="post">
-                    <div class="card mb-2 mt-2" id="item" >
+                    <div class="card mb-3 mt-2 col-12 " id="item" >
+                    <div class="card-body">
                         <div class="card-heder">
                             <a href="" class="btn btn-secondary btn-sm btn-block">
                                 <?php echo $p['name']; ?>
@@ -112,7 +137,7 @@ if (!isset($_SESSION['cart'])) {
                                 <?php echo $p['title']; ?>
                            
                             <img src="img/<?php echo $p['image']; ?>" name="image" class="img-responsive img-thumbnail">
-                            <?php echo $p['description']; ?>
+                        <div class="card-text"><?php echo $p['description']; ?></div>
                         </div>
                         <div class="card-footer">
                         <input type="hidden" name="id_product" value="<?php echo $p['id_product'] ?> " />
@@ -123,6 +148,7 @@ if (!isset($_SESSION['cart'])) {
                         <a href="" name="price"   class="btn btn-danger btn-sm float-right ">
                                 <?php echo $p['price']; ?>
                         </a>
+                        </div>
                         </div>
                         </form>     
                     </div>

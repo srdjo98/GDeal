@@ -11,7 +11,7 @@ $password = mysqli_real_escape_string(db(),$_POST['password']);
 $password_temp = SALT1 . "$password" . SALT2;
 
 
-    if(empty($name) || empty($email) || empty($password)){
+    if(empty($name) || empty($email) || empty($password) || strlen($password)<6){
 
         header('Location: register.view.php?register=empty');
         exit();      
@@ -36,7 +36,7 @@ $password_temp = SALT1 . "$password" . SALT2;
                         }   
                     }
                     
-                    if(!empty($name) and strlen($name)<5){
+                    if(!empty($name) and strlen($name)>=7){
                         $sql="SELECT name from user WHERE name ='$name' "; 
                         $query=mysqli_query(db(),$sql);
                         if(mysqli_num_rows($query) > 0){

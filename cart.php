@@ -27,7 +27,16 @@ if (is_int($amount) AND $amount > 0) {
 }
 
 
-header("Location: loginsession.view.php");
-exit();
+    $id_category = (int)$_POST['id_category'];
+    if(!empty($id_category)){
+    header("Location: products.php?id_category=$id_category");
+    exit();
+    }else{
+        header("Location: loginsession.view.php");
+        exit();  
+    }
+
+
+
 
 ?>

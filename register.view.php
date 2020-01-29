@@ -8,9 +8,12 @@
                 <input type="email" name="email" placeholder="email" class="form-control"><br>
                 <input type="password" name="password" placeholder="password" class="form-control"><br>
                 
-                <button type="submit" class="btn btn-primary form-control">Register</button>
+                <button type="submit" class="btn btn-secondary form-control">Register</button>
             </form>
         <?php 
+        if(isset($_SESSION['id_user'])){
+            session_destroy();
+        }
         $fullUrl = "http:://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         if(strpos($fullUrl, "register=empty") == true){
             echo "<p style='color:red' class='mt-2'>You did not fill in all fields!</p>";

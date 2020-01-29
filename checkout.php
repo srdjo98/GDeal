@@ -11,6 +11,8 @@ use PayPal\Api\RedirectUrls;
 
 require 'db.php';
 
+
+
 $sum = $_SESSION['sum'];
 $tax = 2.00;
 $total = $sum+$tax;
