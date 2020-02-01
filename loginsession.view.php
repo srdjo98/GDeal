@@ -141,7 +141,7 @@ if (!isset($_SESSION['cart'])) {
                         </div>
                         <div class="card-footer">
                         <input type="hidden" name="id_product" value="<?php echo $p['id_product'] ?> " />
-                        <button type="submit" class="btn btn-warning btn-sm float-left" name="add">
+                        <button type="submit" class="btn btn-warning btn-sm float-left" value = "<?php  echo $p['title'] ?> added to the cart !" name="add" onClick='addItem(this)'>
                                 Add to cart
                         </button><br><br>
                         amount: <input type="text" name="amount" size="5" />
@@ -158,4 +158,9 @@ if (!isset($_SESSION['cart'])) {
         </div>
     </div>
 </div>
+<script>
+function addItem(elmt) {
+            alert(elmt.value);
+            }
+</script>
 <?php require "partials/footer.php"; ?>

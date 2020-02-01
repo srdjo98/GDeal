@@ -19,20 +19,24 @@ if(is_array($_SESSION['cart']) AND count($_SESSION['cart'])>0 )
 
      foreach($_SESSION['cart'] as $id_product => $amount){
       
-      $_SESSION['amount'] = $amount;
+     
      
       
-    if(isset($_GET['update']) AND !empty($_GET['amountn'])){
+    if(isset($_POST['update'] )){
     
-         $id = (int)$_GET['id_product'];
+         $id = (int)$_POST['id_product'];
+         
          if($id_product==$id ){
+            
+            $amount = (int)$_POST['amount'];
+            if($amount != 0){
+               $_SESSION['cart'][$id_product] = $amount;
           
-         $amountn = (int)$_GET['amountn'];
-         $amount = $amountn;
-         $_SESSION['amount'] = $amountn;
-      
-
-      }
+            }else{
+               $_SESSION['cart'][$id_product] = $amount = 1;
+            }
+         
+       }
 
 
     }
@@ -49,7 +53,7 @@ if(is_array($_SESSION['cart']) AND count($_SESSION['cart'])>0 )
             while ($record = mysqli_fetch_array($result,MYSQLI_ASSOC))
             {
                
-                $sum+= $_SESSION['amount'] *$record['price'];
+                $sum+=  $amount *$record['price'];
                 echo '<div class="col-4">';
                 echo '<div class="card mb-2 mt-2">';
                 echo "<p><b>$record[title]</b> </p><br>";
@@ -60,9 +64,9 @@ if(is_array($_SESSION['cart']) AND count($_SESSION['cart'])>0 )
                 echo "$amount pieces x $record[price] $ = <span class='btn-warning btn-sm h5'>" .$amount*$record['price']. " $</span>";
                 echo "<a href='delete.php?id_product=$id_product\'><i class='btn btn-danger btn-sm float-right'>Remove</i></a>";
                 echo '</div>';
-                echo "<form method='get' action='cart.view.php?$id_product'>";
+                echo "<form method='post' action='cart.view.php'>";
                 echo "<input type='submit' name='update' size='3'class='btn btn-warning btn-sm float-left '  value='Change amount'></input>";
-                echo "<input type='text' name='amountn' size='3'class='btn-sm float-left ' ></input>";
+                echo "<input type='text' name='amount' size='3'class='btn-sm float-left ' ></input>";
                 echo "<input type='hidden' name='id_product' value='$id_product'>";
                 echo '</form>';
                 echo '</div>';
