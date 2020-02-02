@@ -17,7 +17,7 @@ require_once "functions.php";
  width: auto;
  height: 2000px;
 background: rgb(255,255,255);
-background: linear-gradient(0deg, rgba(255,255,255,1) 6%, rgba(134,142,150,0.969625350140056) 46%, rgba(92,184,92,1) 79%);
+background: -webkit-linear-gradient(90deg, #2BC0E4 10%, #EAECC6 90%);
 background-repeat: no-repeat;
 background-size: cover;
 

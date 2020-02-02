@@ -10,15 +10,15 @@ if (!isset($_SESSION['id_user'])) {
 
 <div class="container">
             <div class="card mb-2 mt-2 float-left">
-                    <p class="h6">Hello <?php echo $_SESSION['name'] ?> <br>See all your orders</p>
-                <form action="user.view.php" method="post">
+                    <p class="h6">Hello <?php echo $_SESSION['name'] ?> <br> Update Purchased products</p>
+                <form action="status.php" method="post">
                         <div  class="card-body">
                              See<select name='name'>
                                 <option value='1' stud_name='sre'>Purchased</option>
                                 <option value='2' stud_name='sam'>In progress</option>
                             <option value='3' stud_name='john'>Sent</option>
                     </select>
-                    <button type="submit" name="check" class="btn btn-warning ">Check your Orders</button>
+                    <button type="submit" name="check" class="btn btn-warning ">Check </button>
                 </form>
                 </div>
                 </div>
@@ -42,7 +42,7 @@ if (!isset($_SESSION['id_user'])) {
     }elseif($name == 3){
         $name = "Sent";
     }
-     $sql = "SELECT id_user,date_time,total_price,status FROM cart_order WHERE id_user = '$_SESSION[id_user]' AND status = '$name'";
+     $sql = "SELECT id_user,date_time,total_price,status FROM cart_order WHERE status = '$name'";
    $result = mysqli_query(db(),$sql) or mysqli_error(db(),$sql);
      if (mysqli_num_rows($result)>0)
      {
@@ -57,7 +57,18 @@ if (!isset($_SESSION['id_user'])) {
      echo          "<th scope='row'>#</th>";
      echo        " <td>$record[date_time]</td>";
      echo        " <td>$record[total_price] $</td>";
-     echo         " <td>$record[status]</td>";
+     echo         " <td>$record[status]
+                    <form method='post' action='update.admin.php'>
+                    
+                    <select name='status'>
+                    <option value='1'>Purchased</option>
+                    <option value='2'>In progress</option>
+                    <option value='3'>Sent</option>
+                    </select>
+                    <input type='hidden' name='id_user' value='$record[id_user]'>
+                    <input type='submit' size='5' value='Change' name='submit' class='brn btn-sm bg-warning'>
+                    </form>
+     </td>";
      echo        "</tr>";
      echo          " </tbody>";
    

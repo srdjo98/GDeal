@@ -19,7 +19,7 @@ if (!isset($_SESSION['cart'])) {
                     <div class="card mb-2 mt-2 col-12" id="item" >
                     <div class="card-body">
                         <div class="card-heder">
-                            <a href="" class="btn btn-secondary btn-sm btn-block">
+                            <a href="" class="btn btn-primary btn-sm btn-block">
                                 <?php echo $p['name']; ?>
                             </a>
                         </div>
@@ -37,7 +37,7 @@ if (!isset($_SESSION['cart'])) {
                         </button><br><br>
                         amount: <input type="text" name="amount" size="5" />
                         <a href="" name="price"   class="btn btn-danger btn-sm float-right ">
-                                <?php echo $p['price']; ?>
+                                <?php echo $p['price']; ?>  $
                         </a>
                      </div>
                     </div>

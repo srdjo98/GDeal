@@ -1,6 +1,6 @@
 </style>
-<nav class="navbar navbar-expand navbar-dark bg-success  ">
-            <a href="index.php" class="navbar-brand" ><img src="img/logo1.png" class="img-fluid">
+<nav class="navbar navbar-expand navbar-light bg-light text-primary ">
+            <a href="#" class="navbar-brand" >GDeal
          </a>    
             <ul class="navbar-nav ml-auto h6">
             <?php

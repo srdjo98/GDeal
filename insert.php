@@ -19,8 +19,7 @@ if (!isset($_SESSION['id_user'])) {
                 if(mysqli_num_rows($query2) == 0){
                     $sql3 = "INSERT INTO category(id_category,name) VALUES (NULL,'$newc')";
                     $query3 = mysqli_query(db(),$sql3);
-                    var_dump($query3);
-                    exit();
+                    
                 
                     if($query3){
                         header('Location: admin.view.php');

@@ -11,13 +11,15 @@ if (!isset($_SESSION['cart'])) {
 <?php $product = getAll(); ?>
 <div class="container">
 
+    
     <div class="row">
     
+   
         <div class="col-10 offset-1">
             <p class='display-4 text-center mt-3 col-12 '>All Products </p>
             <form action="loginsession.view.php" method="get">
             <input type="text" name="search" placeholder="search" class="form-control"><br>
-            <input type="submit" name='submit' class="btn btn-secondary form-control" value="Search">
+            <input type="submit" name='submit' class="btn btn-primary form-control" value="Search">
             </form>
            
             <?php 
@@ -33,27 +35,36 @@ if (!isset($_SESSION['cart'])) {
                 <tr>
 
                 <tr>
-<td width="150"  valign="top">
-<b class="h4">Categorys : </b>
+  
+
 <br />
-<?php
+<div class='row'>
+    <?php
+    
 
-   $sql = "SELECT * FROM category ORDER BY name ASC";
-    $result = mysqli_query(db(),$sql) or die(mysqli_error(db()));
-   
-     if (mysqli_num_rows($result)>0)
-     {
-         while ($record = mysqli_fetch_array($result,MYSQLI_BOTH))
-        
-         echo "<a href=\"products.php?id_category=$record[id_category]\"><button class='btn btn btn-outline-dark btn-sm mt-3 col-xl-4 col-md-4 col-12
-         '>$record[name]</button></a><br />";
-         
-     }
+$sql = "SELECT * FROM category ORDER BY name ASC";
+ $result = mysqli_query(db(),$sql) or die(mysqli_error(db()));
+
+  if (mysqli_num_rows($result)>0)
+  {
+     echo "<div class='list-group col-12 col-xl-4 col-md-4 ' style='left:10px;width:200px;'>";
+     echo "<button type='button' class='list-group-item list-group-item-action active mb-3'>Category</button>";
+      while ($record = mysqli_fetch_array($result,MYSQLI_BOTH))
      
-?>
+  
 
+
+      echo "<a href=\"products.php?id_category=$record[id_category]\"><button type='button' class='list-group-item list-group-item-action  ' style='margin-top:-26px;'
+      >$record[name]</button></a><br />";
+      
+  }
+     echo "</div>";
+  
+?>
+    </div>
 
      <?php
+     
     
     
     if(isset($_GET['submit']) AND !empty($_GET['submit'])){ 
@@ -129,7 +140,7 @@ if (!isset($_SESSION['cart'])) {
                     <div class="card mb-3 mt-2 col-12 " id="item" >
                     <div class="card-body">
                         <div class="card-heder">
-                            <a href="" class="btn btn-secondary btn-sm btn-block">
+                            <a href="" class="btn btn-primary btn-sm btn-block">
                                 <?php echo $p['name']; ?>
                             </a>
                         </div>
