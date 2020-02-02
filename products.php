@@ -32,7 +32,7 @@ if (!isset($_SESSION['cart'])) {
                         <div class="card-footer">
                         <input type="hidden" name="id_product" value="<?php echo $p['id_product'] ?> " />
                         <input type="hidden" name="id_category" value="<?php echo $p['id_category'] ?>">
-                        <button type="submit" class="btn btn-warning btn-sm float-left" name="add">
+                        <button type="submit" class="btn btn-warning btn-sm float-left" name="add" value = "<?php  echo $p['title'] ?> added to the cart !"  onClick='addItem(this)'>
                                 Add to cart
                         </button><br><br>
                         amount: <input type="text" name="amount" size="5" />
@@ -46,6 +46,10 @@ if (!isset($_SESSION['cart'])) {
             </div>
         <?php endforeach; ?>
      </div>
- </div
-
+ </div>
+ <script>
+function addItem(elmt) {
+            alert(elmt.value);
+            }
+</script>
 <?php require "partials/footer.php"; 

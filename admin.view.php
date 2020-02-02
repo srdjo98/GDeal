@@ -1,15 +1,26 @@
 <?php require "partials/head.php"; ?>
 <?php require "partials/navbar.php"; ?>
+<?php 
+$query = "SELECT * FROM `category`";
+$result1 = mysqli_query(db(), $query);
+?>
 <?php $product = getAll(); ?>
                 <div class="card mb-2 mt-2 float-right">
                     <p class="display-4">Add new Product </p>
                     <form action="insert.php" method="post">
                         <div  class="card-body">
-                             Category <select name='name'>
-                                <option value='1' stud_name='sre'>Monitor</option>
-                                <option value='2' stud_name='sam'>Mouse</option>
-                                <option value='3' stud_name='john'>Laptop</option>
-                                </select> <br><br>
+                            Add new Category <input type="text" name="newc"><br><br>
+                             Category <select name ="id_cat">
+
+                            <?php while($row1 = mysqli_fetch_array($result1)):;?>
+
+                            <option  value="<?php echo $row1[0];?>"><?php echo $row1[1];?></option>
+                            
+                            
+                             <?php endwhile;?>
+                            </select><br><br>
+                            
+                           
                             Title <input type="text" name="title"><br><br>
                                 
                         

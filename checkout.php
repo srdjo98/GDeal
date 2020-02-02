@@ -30,7 +30,7 @@ $details->setShipping($tax)
         ->setTax('0.00')
         ->setSubtotal($sum);
 
-$amount->setCurrency('EUR')
+$amount->setCurrency('USD')
        ->setTotal($total)
        ->setDetails($details);
        

@@ -85,9 +85,7 @@ if($sum!=0) {
    echo '<div class="col-4">';
    echo '<div class="card mb-2 mt-1">';
    echo "<h4 class='mt-3'>Total: $sum $ </h4>";
-   echo "
-     
-      <a href='checkout.php'><span class='btn btn-warning btn-lg float-right'>Check Out</span></a>
+   echo " <a href='checkout.php'><span class='btn btn-warning btn-lg float-right'><i class='fab fa-cc-paypal icon-5x icon-check-empty'></i>  Check Out</span></a>
    </form></div>";
    
    echo '</div>';

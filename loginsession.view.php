@@ -146,7 +146,7 @@ if (!isset($_SESSION['cart'])) {
                         </button><br><br>
                         amount: <input type="text" name="amount" size="5" />
                         <a href="" name="price"   class="btn btn-danger btn-sm float-right ">
-                                <?php echo $p['price']; ?>
+                                <?php echo $p['price']; ?>  $
                         </a>
                         </div>
                         </div>
