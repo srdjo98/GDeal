@@ -7,18 +7,20 @@ if (!isset($_SESSION['id_user'])) {
 }else{
 
     if(isset($_POST['insert'])){
-        $title = mysqli_real_escape_string(db(),$_POST['title']);
         $newc = mysqli_real_escape_string(db(),$_POST['newc']);
         $id_cat = mysqli_real_escape_string(db(),$_POST['id_cat']);
-        if(!empty($id_cat)){
+        if(!empty($newc)){
             
             
-                $sql2="SELECT id_category,name from category WHERE name ='$newc'"; 
+                $sql2="SELECT name from category WHERE name ='$newc'"; 
                 $query2=mysqli_query(db(),$sql2);
                 
-                if(mysqli_num_rows == 0){
+
+                if(mysqli_num_rows($query2) == 0){
                     $sql3 = "INSERT INTO category(id_category,name) VALUES (NULL,'$newc')";
                     $query3 = mysqli_query(db(),$sql3);
+                    var_dump($query3);
+                    exit();
                 
                     if($query3){
                         header('Location: admin.view.php');
@@ -26,7 +28,8 @@ if (!isset($_SESSION['id_user'])) {
                     }
                     
                 }
-        
+                header('Location: admin.view.php');
+                exit();
             
             
             
@@ -36,25 +39,12 @@ if (!isset($_SESSION['id_user'])) {
             
     
         }elseif(empty($newc)){
-       
-         
-        
-         
-        
-        $sql1 = "SELECT id_category FROM category WHERE id_category = '$id_cat' AND name";
-        $result1 = mysqli_query(db(),$sql1);
-        
-        
-        if (mysqli_num_rows($result1) > 0) {
             
-    
-            while ($record = mysqli_fetch_array($result1, MYSQLI_BOTH)) {
-                
-                   var_dump($record);
-            }
-    
-        }elseif((!empty($title) and !empty($newc)) OR (!empty($title) and !empty($id_cat))){
-    
+            $id_cat = mysqli_real_escape_string(db(),$_POST['id_cat']);
+         
+        
+            $sql1 = "SELECT id_category FROM category WHERE id_category = '$id_cat'";
+            $result1 = mysqli_query(db(),$sql1);
     
             $title = mysqli_real_escape_string(db(),$_POST['title']);
             $image = mysqli_real_escape_string(db(),$_POST['image']);
@@ -80,4 +70,4 @@ if (!isset($_SESSION['id_user'])) {
 
     }
 
-    }
+    
