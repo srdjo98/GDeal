@@ -15,7 +15,7 @@ if (!isset($_SESSION['id_user'])) {
                         <div  class="card-body">
                              See<select name='name'>
                                 <option value='1' stud_name='sre'>Purchased</option>
-                                <option value='2' stud_name='sam'>In progress</option>
+                                <option value='2' stud_name='sam'>Proccessing</option>
                             <option value='3' stud_name='john'>Sent</option>
                     </select>
                     <button type="submit" name="check" class="btn btn-warning ">Check your Orders</button>
@@ -38,7 +38,7 @@ if (!isset($_SESSION['id_user'])) {
     if($name == 1){
         $name  = "Purchased";
     }elseif($name == 2){
-        $name = "In progress";
+        $name = "Proccessing";
     }elseif($name == 3){
         $name = "Sent";
     }

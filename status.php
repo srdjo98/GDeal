@@ -15,7 +15,7 @@ if (!isset($_SESSION['id_user'])) {
                         <div  class="card-body">
                              See<select name='name'>
                                 <option value='1' stud_name='sre'>Purchased</option>
-                                <option value='2' stud_name='sam'>In progress</option>
+                                <option value='2' stud_name='sam'>Proccessing</option>
                             <option value='3' stud_name='john'>Sent</option>
                     </select>
                     <button type="submit" name="check" class="btn btn-warning ">Check </button>
@@ -38,11 +38,11 @@ if (!isset($_SESSION['id_user'])) {
     if($name == 1){
         $name  = "Purchased";
     }elseif($name == 2){
-        $name = "In progress";
+        $name = "Proccessing";
     }elseif($name == 3){
         $name = "Sent";
     }
-     $sql = "SELECT id_user,date_time,total_price,status FROM cart_order WHERE status = '$name'";
+     $sql = "SELECT id_cart_order,id_user,date_time,total_price,status FROM cart_order WHERE status = '$name'";
    $result = mysqli_query(db(),$sql) or mysqli_error(db(),$sql);
      if (mysqli_num_rows($result)>0)
      {
@@ -62,10 +62,11 @@ if (!isset($_SESSION['id_user'])) {
                     
                     <select name='status'>
                     <option value='1'>Purchased</option>
-                    <option value='2'>In progress</option>
+                    <option value='2'>Proccessing</option>
                     <option value='3'>Sent</option>
                     </select>
                     <input type='hidden' name='id_user' value='$record[id_user]'>
+                    <input type='hidden' name='id_cart' value='$record[id_cart_order]'>
                     <input type='submit' size='5' value='Change' name='submit' class='brn btn-sm bg-warning'>
                     </form>
      </td>";
