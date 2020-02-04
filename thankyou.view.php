@@ -2,14 +2,17 @@
 
 <?php 
 
+
   require "db.php";
 
+ 
   $date = date("Y-m-d H:i:s");   
-  $cart_order = $db->prepare("INSERT INTO cart_order(id_cart_order,id_user,date_time,total_price,status) VALUES(:id_cart_order,:id_user,:date_time,:total_price,:status)");
+  $cart_order = $db->prepare("INSERT INTO cart_order(id_cart_order,id_user,date_time,order_text,total_price,status) VALUES(:id_cart_order,:id_user,:date_time,:order_text,:total_price,:status)");
   $cart_order->execute([
     'id_cart_order' => NULL,
     'id_user' => $_SESSION['id_user'],
     'date_time' => $date,
+    'order_text' => $_SESSION['txt'],
     'total_price' => $_SESSION['sum'],
     'status' => "purchased"
 
@@ -41,8 +44,7 @@
     Having trouble? <a href="">Contact us</a>
   </p>
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="
-    loginsession.view.php" role="button">Continue shoping</a>
+    <a class="btn btn-primary btn-lg" href="gdeal/loginsession.view.php" role="button">Continue shoping</a>
   </p>
 </div>
 <?php require "partials/footer.php"; ?>

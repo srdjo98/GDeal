@@ -30,8 +30,7 @@ if(isset($_POST['submit'])){
     $sql1 = "SELECT email FROM user WHERE id_user = '$id_user'";
     $query = mysqli_query(db(),$sql1) or die(mysqli_error(db()));
     $email = mysqli_fetch_row($query);
-    var_dump($email);
-    exit();
+   
     $sql = "UPDATE cart_order SET status = '$name' WHERE id_cart_order = '$id_cart' AND id_user= '$id_user'";
     $query = mysqli_query(db(),$sql) or die(mysqli_error(db()));
   

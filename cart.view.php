@@ -8,7 +8,8 @@ if(empty($_SESSION['cart'])){
 }else{
 
 $sum=0;
-
+$message = "";
+$number = 1;
 
 
 
@@ -54,7 +55,9 @@ if(is_array($_SESSION['cart']) AND count($_SESSION['cart'])>0 )
             {
                
                 $sum+=  $amount *$record['price'];
-                echo '<div class="col-4">';
+                $message .= "$number. $record[title] $amount pieces x $record[price] eur =" . $amount * $record['price'] . " eur \n";
+                $number++;
+                echo '<div class="col-12 col-md-6 col-xl-6">';
                 echo '<div class="card mb-2 mt-2">';
                 echo "<p><b>$record[title]</b> </p><br>";
                 echo '<div class="card-body ">';
@@ -78,10 +81,13 @@ if(is_array($_SESSION['cart']) AND count($_SESSION['cart'])>0 )
 
        }
    }
+  
 
 }
 
 if($sum!=0) {
+   
+    
    echo '<div class="col-4">';
    echo '<div class="card mb-2 mt-1">';
    echo "<h4 class='mt-3'>Total: $sum $ </h4>";
@@ -92,6 +98,12 @@ if($sum!=0) {
    echo '</div>';
    
   $_SESSION['sum'] = $sum;
+  $date = date("Y-m-d H:i:s");   
+   $message .= "\nTotal price: $sum dollars\n\n";
+   $message .= "Date of order: $date\n";
+   $mess = nl2br($message);
+   $_SESSION['txt'] = $mess;
+   
    
 }
 

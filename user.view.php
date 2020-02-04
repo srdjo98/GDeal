@@ -22,13 +22,15 @@ if (!isset($_SESSION['id_user'])) {
                 </form>
                 </div>
                 </div>
-            <table class=' table table-borderless'>
+            <table class=' table table-borderless table-sm'>
             <thead>
             <tr>
             <th scope='col'><?php echo $_SESSION['name'] ?></th>
             <th scope='col'>Date </th>
+            <th scope='col'>Order </th>
            <th scope='col'>Total amount</th>
           <th scope='col'>Status</th>
+          
             </tr>
             </thead>
             <?php 
@@ -42,7 +44,7 @@ if (!isset($_SESSION['id_user'])) {
     }elseif($name == 3){
         $name = "Sent";
     }
-     $sql = "SELECT id_user,date_time,total_price,status FROM cart_order WHERE id_user = '$_SESSION[id_user]' AND status = '$name'";
+     $sql = "SELECT id_user,date_time,order_text,total_price,status FROM cart_order WHERE id_user = '$_SESSION[id_user]' AND status = '$name'";
    $result = mysqli_query(db(),$sql) or mysqli_error(db(),$sql);
      if (mysqli_num_rows($result)>0)
      {
@@ -56,6 +58,8 @@ if (!isset($_SESSION['id_user'])) {
      echo        " <tr>";
      echo          "<th scope='row'>#</th>";
      echo        " <td>$record[date_time]</td>";
+     echo         "<td><textarea>$record[order_text]</textarea></td>";
+    
      echo        " <td>$record[total_price] $</td>";
      echo         " <td>$record[status]</td>";
      echo        "</tr>";
