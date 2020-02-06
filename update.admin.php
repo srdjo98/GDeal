@@ -33,7 +33,12 @@ if(isset($_POST['submit'])){
    
     $sql = "UPDATE cart_order SET status = '$name' WHERE id_cart_order = '$id_cart' AND id_user= '$id_user'";
     $query = mysqli_query(db(),$sql) or die(mysqli_error(db()));
+        
+    $sqlorder = "SELECT order_text FROM cart_order WHERE id_cart_order = '$id_cart'";
+    $queryorder = mysqli_query(db(),$sqlorder) or die(mysqli_error(db()));
+    $order_text = mysqli_fetch_row($queryorder);
   
+   
    if($query){
     require("PHPMailer-master/src/PHPMailer.php");
     require("PHPMailer-master/src/SMTP.php");
@@ -67,7 +72,9 @@ if(isset($_POST['submit'])){
 
     $mail->Subject = "Your order was sent";
     $mail->Body = "<div>
-    <h3 style='color:black;font-size:22px'>Today your order was sent</h3><br>
+
+    <h4 style='color:black;font-size:16px'>Hello<br>Today your order was sent</h3><br>
+    <p style='border:1px solid black;word-break:break-all'>$order_text[0]</p>
     </div>";
     $mail->AltBody = "This is the plain text version of the email content";
 

@@ -18,8 +18,20 @@
 
   ]);
 
-
+  $id_card_order = $db->lastInsertId();
   if($cart_order){
+    
+    foreach($_SESSION['cart'] as $id_product => $amount){
+      $sql = "SELECT price FROM product WHERE id_product = '$id_product'";
+      $query = $db->query($sql);
+      $row = $query->fetch();
+      
+
+      $cart_order_item = "INSERT INTO cart_order_item (id_cart_order_item,id_cart_order,id_product,amount,price)
+      VALUES (NULL,$id_card_order,$id_product,$amount,$row[0])";
+      $db->exec($cart_order_item);
+    }
+
     unset($_SESSION['cart']);
   
 

@@ -7,9 +7,9 @@ $result1 = mysqli_query(db(), $query);
 <?php $product = getAll(); ?>
                 <div class="card mb-2 mt-2 float-right">
                     <p class="display-4">Add new Product </p>
-                    <form action="insert.php" method="post">
+                    <form enctype="multipart/form-data" action="insert.php" method="post">
                         <div  class="card-body">
-                            Add new Category <input type="text" name="newc"><br><br>
+                           
                              Category <select name ="id_cat">
 
                             <?php while($row1 = mysqli_fetch_array($result1)):;?>
@@ -24,10 +24,10 @@ $result1 = mysqli_query(db(), $query);
                             Title <input type="text" name="title"><br><br>
                                 
                         
-                            Image <input type="text" name="image"><br><br>
+                            Image  <input type="file" name="file"  ><br><br>
                             
-
-                            Description <input type="text" name="description"><br><br>
+                            Description <br>
+                            <textarea name="description"> </textarea><br><br>
                             
                         </div>
                         <div class="card-footer">
@@ -39,20 +39,44 @@ $result1 = mysqli_query(db(), $query);
                        
                     </form>     
                 </div>
+                <?php 
+                $query = "SELECT * FROM `category`";
+                $result1 = mysqli_query(db(), $query);
+                ?>
+                <div class="card mb-2 mt-2 float-right">
+                    <p class="display-4">Add new Category </p>
+                    <form action="insert.php" method="post">
+                        <div  class="card-body">
+                            Add new Category <input type="text" name="newc"><br><br>
+                            Category <select name ="id_cat">
+
+                            <?php while($row1 = mysqli_fetch_array($result1)):;?>
+
+                            <option  value="<?php echo $row1[0];?>"><?php echo $row1[1];?></option>
+                            
+                            
+                             <?php endwhile;?>
+                            </select><br><br>
+                                                    
+                        </div><br>
+                        <button type="submit" name="insert" class="btn btn-warning ">Insert</button>
+                        <button type="submit" name="delete" class="btn btn-danger float-right">Delete</button>
+                    </form>     
+                </div>
 <?php foreach($product as $p): ?>
     <div class="col-4">
                     
                     <div class="card mb-2 mt-2">
                     <p class="display-4">Update & Delete </p>
-                    <form action="change.php" method="post">
+                    <form enctype="multipart/form-data"  action="change.php" method="post">
                         <div name="title" class="card-body text-center">
                             Update Title <input type="text" name="title"><br>
                                 <?php echo $p['title']; ?>
                             <br>
-                            Update Image <input type="text" name="image">
+                            Update Image  <input type="file" name="file"  ><br><br>
                             <img src="img/<?php echo $p['image']; ?>" name="image" class="img-responsive img-thumbnail"><br>
 
-                            Update Description <input type="text" name="description"><br>
+                            Update Description <br> <textarea type="text" name="description"></textarea><br>
                             <?php echo $p['description']; ?>
                         </div>
                         <div class="card-footer">

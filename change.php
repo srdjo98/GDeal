@@ -6,12 +6,14 @@ if (!isset($_SESSION['id_user'])) {
     exit();
 }
 
-if(isset($_POST['update'])){
-
+if(isset($_POST['update']) ){
     
+
+        $file = $_FILES["file"];
+        $image = $_FILES['file']["name"];
         $id_product =   mysqli_real_escape_string(db(),$_POST['id_product']);
         $title = mysqli_real_escape_string(db(),$_POST['title']);
-        $image = mysqli_real_escape_string(db(),$_POST['image']);
+        
         $description = mysqli_real_escape_string(db(),$_POST['description']);
         $price = (int)mysqli_real_escape_string(db(),$_POST['price']);
         
@@ -48,7 +50,7 @@ if(isset($_POST['update'])){
 
     $sql = "DELETE FROM product WHERE id_product = '$id_product'";
     $query = mysqli_query(db(),$sql);
-    var_dump($sql);
+    
     if($query){
         header('Location: admin.view.php');
         exit();

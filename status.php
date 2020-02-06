@@ -13,11 +13,21 @@ if (!isset($_SESSION['id_user'])) {
                     <p class="h6">Hello <?php echo $_SESSION['name'] ?> <br> Update Purchased products</p>
                 <form action="status.php" method="post">
                         <div  class="card-body">
-                             See<select name='name'>
-                                <option value='1' stud_name='sre'>Purchased</option>
-                                <option value='2' stud_name='sam'>Proccessing</option>
-                            <option value='3' stud_name='john'>Sent</option>
-                    </select>
+                        <select name="name">
+                            <option selected="selected">Choose</option>
+                            <?php
+                        
+                            $name = array("Purchased", "Proccessing", "Sent");
+                            
+                          
+                            foreach($name as $item){
+                            ?>
+                            <option value="<?php echo strtolower($item); ?>"><?php echo $item; ?></option>
+                            <?php
+                            }
+                            ?>
+                            </select>
+                        
                     <button type="submit" name="check" class="btn btn-warning ">Check </button>
                 </form>
                 </div>
@@ -57,10 +67,11 @@ if (!isset($_SESSION['id_user'])) {
      echo          "<th scope='row'>#</th>";
      echo        " <td>$record[date_time]</td>";
      echo        " <td>$record[total_price] $</td>";
-     echo         " <td>$record[status]
+     echo         " <td>
                     <form method='post' action='update.admin.php'>
                     
                     <select name='status'>
+                    <option selected='selected'>$record[status]</option>
                     <option value='1'>Purchased</option>
                     <option value='2'>Proccessing</option>
                     <option value='3'>Sent</option>

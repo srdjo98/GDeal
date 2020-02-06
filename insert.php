@@ -5,12 +5,31 @@ if (!isset($_SESSION['id_user'])) {
     header("Location: index.php");
     exit();
 }else{
+    if(isset($_POST['delete'])){
+        $id_cat = mysqli_real_escape_string(db(),$_POST['id_cat']);
+         
+        
+        $sql11 = "SELECT name FROM category WHERE id_category = '$id_cat'";
+        $result11 = mysqli_query(db(),$sql11);
+        if(mysqli_num_rows($result11)>0){
 
-    if(isset($_POST['insert'])){
+            while($record=mysqli_fetch_array($result11)){
+               $sqldel = "DELETE FROM category WHERE name ='$record[0]'";
+               $res = mysqli_query(db(),$sqldel);
+            }
+            header('Location: admin.view.php');
+                exit();
+
+        }
+        
+        
+
+    
+    }elseif(isset($_POST['insert'])){
         $newc = mysqli_real_escape_string(db(),$_POST['newc']);
         $id_cat = mysqli_real_escape_string(db(),$_POST['id_cat']);
         if(!empty($newc)){
-            
+                
             
                 $sql2="SELECT name from category WHERE name ='$newc'"; 
                 $query2=mysqli_query(db(),$sql2);
@@ -39,6 +58,8 @@ if (!isset($_SESSION['id_user'])) {
     
         }elseif(empty($newc)){
             
+            $file = $_FILES["file"];
+
             $id_cat = mysqli_real_escape_string(db(),$_POST['id_cat']);
          
         
@@ -46,7 +67,7 @@ if (!isset($_SESSION['id_user'])) {
             $result1 = mysqli_query(db(),$sql1);
     
             $title = mysqli_real_escape_string(db(),$_POST['title']);
-            $image = mysqli_real_escape_string(db(),$_POST['image']);
+            $image = $_FILES['file']["name"];
             $description = mysqli_real_escape_string(db(),$_POST['description']);
             $price = (int)mysqli_real_escape_string(db(),$_POST['price']);
             
